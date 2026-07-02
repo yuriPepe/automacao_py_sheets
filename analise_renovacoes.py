@@ -1,5 +1,3 @@
-print("Programa iniciado!")
-
 import gspread
 import pandas as pd
 from google.oauth2.service_account import Credentials
@@ -15,12 +13,16 @@ aba = planilha.worksheet("07.26")
 #lê os dados
 df = pd.DataFrame(aba.get_all_records())
 
+
 # Remove espaços extras da coluna Renovou
-df["Renovou?"] = df["Renovou?"].astype(str).str.strip()
+df["Renovou?"] = (df["Renovou?"].astype(str).str.strip().str.lower())
+
 
 # Contagem
-renovaram = (df["Renovou?"] == "Sim").sum()
-nao_renovaram = (df["Renovou?"] == "Não").sum()
+renovaram = (df["Renovou?"] == "sim").sum()
+nao_renovaram = (
+    (df["Renovou?"] == "não").sum() | (df["Renovou?"] == "nao").sum()
+)
 
 total = renovaram + nao_renovaram
 
