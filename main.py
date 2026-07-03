@@ -1,0 +1,16 @@
+from services.sheets_service import ler_planilha
+from services.analise_service import calcular_renovacoes
+from services.grafico_service import gerar_grafico
+from services.pdf_service import gerar_pdf
+
+
+df = ler_planilha(
+    "REMATRICULAS 2025 - 2026",
+    "07.26"
+)
+
+resultado = calcular_renovacoes(df)
+
+gerar_grafico(resultado)
+
+gerar_pdf(resultado)

@@ -1,1 +1,7 @@
 credenciais.json
+
+imagens/
+graficos/
+relatorios/
+
+__pycache__/
