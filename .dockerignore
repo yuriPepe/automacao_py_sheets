@@ -1,0 +1,25 @@
+# ambiente virtual
+venv/
+.env/
+
+# cache Python
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+
+# credenciais sensíveis
+credenciais.json
+*.json
+
+# arquivos gerados pelo programa
+output/
+dist/
+build/
+*.log
+
+# sistema
+.DS_Store

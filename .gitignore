@@ -5,3 +5,5 @@ graficos/
 relatorios/
 
 __pycache__/
+
+venv/
