@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import simpledialog, messagebox
+from tkinter import simpledialog, messagebox, filedialog
 
 def obter_aba():
     root = tk.Tk()
@@ -24,3 +24,20 @@ def obter_aba():
             "Erro",
             "Formato inválido.\nExemplo: 01.26"
         )
+
+    
+
+def escolher_local_pdf(nome_sugerido):
+    root = tk.Tk()
+    root.withdraw()
+
+    caminho = filedialog.asksaveasfilename(
+        title="Salvar relatório",
+        initialfile=nome_sugerido,
+        defaultextension=".pdf",
+        filetypes=[("Arquivos PDF", "*.pdf")]
+    )
+
+    root.destroy()
+
+    return caminho
