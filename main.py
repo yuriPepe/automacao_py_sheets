@@ -19,10 +19,4 @@ df = ler_planilha(
 
 resultado = calcular_renovacoes(df)
 
-gerar_grafico(resultado)
-
-<<<<<<< HEAD
-gerar_pdf(resultado)    
-=======
 gerar_pdf(resultado, caminho_pdf)
->>>>>>> e50b4767b548ebbeb345fe5c3c9ffd2be3ebdddb
