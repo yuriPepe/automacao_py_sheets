@@ -4,7 +4,7 @@ from reportlab.platypus import Spacer
 from reportlab.platypus import Image
 from reportlab.lib.styles import getSampleStyleSheet
 
-def gerar_pdf(resultado):
+def gerar_pdf(resultado, caminho_pdf):
 
     total = resultado["total"]
     renovaram = resultado["renovaram"]
@@ -30,7 +30,7 @@ def gerar_pdf(resultado):
     styles = getSampleStyleSheet()
 
     pdf = SimpleDocTemplate(
-    "relatorios/Relatorio_Renovacoes.pdf",
+    caminho_pdf,
     topMargin=10,
     bottomMargin=20,
     leftMargin=40,
@@ -80,5 +80,6 @@ def gerar_pdf(resultado):
     conteudo.append(imagem)
 
     pdf.build(conteudo)
+    
 
 print("PDF criado com sucesso!")
