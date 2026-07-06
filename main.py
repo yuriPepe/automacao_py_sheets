@@ -13,4 +13,4 @@ resultado = calcular_renovacoes(df)
 
 gerar_grafico(resultado)
 
-gerar_pdf(resultado)
+gerar_pdf(resultado)    
