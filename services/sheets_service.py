@@ -14,7 +14,9 @@ def ler_planilha(nome_planilha, aba):
     worksheet = sh.worksheet(aba)
 
     # Cria o DataFrame
-    df = worksheet.get_all_records()
+    dados = worksheet.get_all_records()
+
+    df = pd.DataFrame(dados)
 
     # Retorna para quem chamou
     return df
