@@ -7,3 +7,5 @@ relatorios/
 __pycache__/
 
 venv/
+
+temp/

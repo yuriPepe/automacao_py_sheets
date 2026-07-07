@@ -1,6 +1,6 @@
 from services.sheets_service import ler_planilha
-from services.analise_service import calcular_renovacoes
-from services.grafico_service import gerar_grafico
+from services.analise_service import calcular_renovacoes_por_ano
+from services.grafico_service import gerar_grafico_renovacoes_por_ano
 from services.pdf_service import gerar_pdf
 from ui.input_service import obter_aba, escolher_local_pdf
 
@@ -17,6 +17,8 @@ df = ler_planilha(
     aba
 )
 
-resultado = calcular_renovacoes(df)
+resultado_por_ano  = calcular_renovacoes_por_ano(df)
 
-gerar_pdf(resultado, caminho_pdf)
+caminho_grafico = gerar_grafico_renovacoes_por_ano(resultado_por_ano)
+
+gerar_pdf(resultado_por_ano, caminho_pdf, caminho_grafico)

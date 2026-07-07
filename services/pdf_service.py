@@ -2,15 +2,20 @@ from reportlab.platypus import SimpleDocTemplate
 from reportlab.platypus import Paragraph
 from reportlab.platypus import Spacer
 from reportlab.platypus import Image
+from reportlab.platypus import Table, TableStyle
+from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
+import os
 
-def gerar_pdf(resultado, caminho_pdf):
+def gerar_pdf(resultado_por_ano, caminho_pdf, caminho_grafico):
 
-    total = resultado["total"]
-    renovaram = resultado["renovaram"]
-    nao_renovaram = resultado["nao"]
-    perc_renovaram = resultado["perc_renovaram"]
-    perc_nao = resultado["perc_nao"]
+    for item in resultado_por_ano:
+        ano = item["ano"]
+        total = item["total"]
+        renovaram = item["renovaram"]
+        nao_renovaram = item["nao_renovaram"]
+        perc_renovaram = item["perc_renovaram"]
+        perc_nao = item["perc_nao"]
 
     conteudo = []
 
@@ -40,46 +45,67 @@ def gerar_pdf(resultado, caminho_pdf):
     conteudo.append(
     Paragraph("<b>RELATÓRIO DE RENOVAÇÕES</b>", styles["Title"])
 )
+    
+    conteudo.append(Spacer(1,30))
+    
+
+    dados = [
+    ["Ano", "Atletas", "Renovaram", "Não Renovaram"]
+]
+    
+    total_atletas = 0
+
+    for item in resultado_por_ano:
+
+        total_atletas += item["total"]
+
+        dados.append([
+            item["ano"],
+            item["total"],
+            f'{item["renovaram"]} ({item["perc_renovaram"]:.1f}%)',
+            f'{item["nao_renovaram"]} ({item["perc_nao"]:.1f}%)'
+    ])
+        
+    dados.append([
+    "TOTAL",
+    total_atletas,
+    "",
+    ""
+])
+
+    tabela = Table(dados)
+
+    tabela.setStyle(TableStyle([
+    ("BACKGROUND", (0,0), (-1,0), colors.darkblue),
+    ("TEXTCOLOR", (0,0), (-1,0), colors.white),
+
+    ("FONTNAME", (0,0), (-1,0), "Helvetica-Bold"),
+    ("BOTTOMPADDING", (0,0), (-1,0), 10),
+
+    ("BACKGROUND", (0,1), (-1,-1), colors.beige),
+
+    ("GRID", (0,0), (-1,-1), 1, colors.black),
+
+    ("ALIGN", (0,0), (-1,-1), "CENTER"),
+
+    ("FONTSIZE", (0,0), (-1,-1), 10),
+]))
+
+    conteudo.append(tabela)
+
 
     conteudo.append(Spacer(1,20))
 
-    conteudo.append(
-    Paragraph(f"Total de atletas: <b>{total}</b>", styles["Normal"])
-)
+    grafico = Image(caminho_grafico)
+    grafico.drawWidth = 450
+    grafico.drawHeight = 270
 
-    conteudo.append(
-    Paragraph(f"Renovaram: <b>{renovaram}</b>", styles["Normal"])
-)
-
-    conteudo.append(
-    Paragraph(f"Não renovaram: <b>{nao_renovaram}</b>", styles["Normal"])
-)
-
-    conteudo.append(
-    Paragraph(
-        f"Taxa de renovação: <b>{perc_renovaram:.2f}%</b>",
-        styles["Normal"]
-    )
-)
-
-    conteudo.append(
-    Paragraph(
-        f"Taxa de não renovação: <b>{perc_nao:.2f}%</b>",
-        styles["Normal"]
-    )
-)
-
-    conteudo.append(Spacer(1,20))
-
-    imagem = Image(
-    "graficos/renovacoes.png",
-    width=300,
-    height=300
-)
-
-    conteudo.append(imagem)
+    conteudo.append(grafico)
 
     pdf.build(conteudo)
+
+    if os.path.exists(caminho_grafico):
+        os.remove(caminho_grafico)
     
 
 print("PDF criado com sucesso!")
