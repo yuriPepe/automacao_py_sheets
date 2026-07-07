@@ -6,6 +6,10 @@ from ui.input_service import obter_aba, escolher_local_pdf
 
 aba = obter_aba()
 
+if not aba:
+    print("operação cancelada")
+    exit()
+
 caminho_pdf = escolher_local_pdf(f"Relatorio_Renovacoes_{aba}.pdf")
 
 if not caminho_pdf:
