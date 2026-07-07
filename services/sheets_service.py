@@ -19,3 +19,5 @@ def ler_planilha(nome_planilha, aba):
     # Retorna para quem chamou
     return df
 
+    
+

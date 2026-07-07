@@ -7,7 +7,7 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 import os
 
-def gerar_pdf(resultado_por_ano, caminho_pdf, caminho_grafico):
+def gerar_pdf(resultado_por_ano, resultado_geral, caminho_pdf, caminho_grafico):
 
     for item in resultado_por_ano:
         ano = item["ano"]
@@ -16,6 +16,7 @@ def gerar_pdf(resultado_por_ano, caminho_pdf, caminho_grafico):
         nao_renovaram = item["nao_renovaram"]
         perc_renovaram = item["perc_renovaram"]
         perc_nao = item["perc_nao"]
+
 
     conteudo = []
 
@@ -66,11 +67,14 @@ def gerar_pdf(resultado_por_ano, caminho_pdf, caminho_grafico):
             f'{item["nao_renovaram"]} ({item["perc_nao"]:.1f}%)'
     ])
         
+
+    
+
     dados.append([
-    "TOTAL",
-    total_atletas,
-    "",
-    ""
+        "TOTAL",
+        resultado_geral["total"],
+        f'{resultado_geral["renovaram"]} ({resultado_geral["perc_renovaram"]:.1f}%)',
+        f'{resultado_geral["nao_renovaram"]} ({resultado_geral["perc_nao"]:.1f}%)'
 ])
 
     tabela = Table(dados)

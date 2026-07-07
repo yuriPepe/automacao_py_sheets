@@ -33,3 +33,25 @@ def calcular_renovacoes_por_ano(df):
         })
 
     return resultado
+
+def calcular_renovacoes_geral(df):
+
+    df["Renovou?"] = (
+        df["Renovou?"]
+        .astype(str)
+        .str.strip()
+        .str.lower()
+    )
+
+    renovaram_geral = (df["Renovou?"] == "sim").sum()
+    nao_renovaram_geral = df["Renovou?"].isin(["não", "nao"]).sum()
+
+    total_geral = renovaram_geral + nao_renovaram_geral
+
+    return {
+        "total": total_geral,
+        "renovaram": renovaram_geral,
+        "nao_renovaram": nao_renovaram_geral,
+        "perc_renovaram": renovaram_geral / total_geral * 100 if total_geral else 0,
+        "perc_nao": nao_renovaram_geral / total_geral * 100 if total_geral else 0
+    }
