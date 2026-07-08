@@ -1,8 +1,6 @@
 credenciais.json
 
 imagens/
-graficos/
-relatorios/
 
 __pycache__/
 
@@ -10,4 +8,4 @@ venv/
 
 temp/
 
-teste_motivos
+teste_motivos.py

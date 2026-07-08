@@ -20,4 +20,18 @@ def analise_motivos(df):
     
     df["Por que não renovou?"] = df["Por que não renovou?"].apply(normalizar_texto)
 
-    return df["Por que não renovou?"].value_counts()
+    contagem = df["Por que não renovou?"].value_counts()
+
+    resultado = []
+
+    total = contagem.sum()
+
+    for motivo, quantidade in contagem.items():
+
+        resultado.append({
+        "motivo": motivo,
+        "quantidade": quantidade,
+        "percentual": quantidade / total * 100
+    })
+
+    return resultado
