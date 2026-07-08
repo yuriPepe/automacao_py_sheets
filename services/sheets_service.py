@@ -2,22 +2,21 @@ import gspread
 import pandas as pd
 from google.oauth2.service_account import Credentials
 
-def ler_planilha(nome_planilha, aba):
-
-    # Conecta à conta Google
+#abre planilha
+def _abrir_planilha(nome_planilha):
     gc = gspread.service_account(filename="credenciais.json")
 
-    # Abre a planilha
-    sh = gc.open(nome_planilha)
+    return gc.open(nome_planilha)
 
-    #Abre aba escolhida
-    worksheet = sh.worksheet(aba)
+#retorna dados da aba planilha
+def ler_planilha(nome_planilha, aba):
+    planilha = _abrir_planilha(nome_planilha)
+    worksheet = planilha.worksheet(aba)
 
-    # Cria o DataFrame
-    df = pd.DataFrame(worksheet.get_all_records())
+    return pd.DataFrame(worksheet.get_all_records())
 
-    # Retorna para quem chamou
-    return df
+#lista todas abas da planilha
+def listar_abas(nome_planilha):
+    planilha = _abrir_planilha(nome_planilha)
 
-    
-
+    return [aba.title for aba in planilha.worksheets()]
