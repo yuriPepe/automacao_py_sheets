@@ -15,6 +15,7 @@ def gerar_grafico_renovacoes_por_ano(resultado_por_ano):
 
     plt.bar(anos, percentuais)
 
+
     plt.title("Percentual de Renovação por Ano de Entrada")
     plt.xlabel("Ano de Entrada")
     plt.ylabel("% de Renovação")
