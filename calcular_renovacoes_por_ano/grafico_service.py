@@ -13,17 +13,19 @@ def gerar_grafico_renovacoes_por_ano(resultado_por_ano):
 
     plt.figure(figsize=(8,5))
 
-    plt.bar(anos, percentuais)
+    totais = [item["total"] for item in resultado_por_ano]
 
+    barras = plt.bar(anos, percentuais)
 
-    plt.title("Percentual de Renovação por Ano de Entrada")
-    plt.xlabel("Ano de Entrada")
-    plt.ylabel("% de Renovação")
-    plt.ylim(0, 100)
-    plt.yticks(range(0, 101, 5))
-
-    for i, valor in enumerate(percentuais):
-        plt.text(i, valor + 1, f"{valor:.1f}%", ha="center")
+    for barra, perc, total in zip(barras, percentuais, totais):
+        plt.text(
+        barra.get_x() + barra.get_width() / 2,
+        barra.get_height() + 1,
+        f"{perc:.2f}%\n({total} atletas)",
+        ha="center",
+        va="bottom",
+        fontsize=9
+    )
 
     plt.tight_layout()
 
