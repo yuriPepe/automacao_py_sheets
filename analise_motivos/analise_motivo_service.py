@@ -18,10 +18,10 @@ def normalizar_texto(texto):
 
 def categorizar_motivo(motivo):
 
-    if "lesao" in motivo or "cirurgia" in motivo or "machuc" in motivo:
-        return "Lesão"
+    if "lesao" in motivo or "cirurgia" in motivo or "machuc" in motivo or "saude" in motivo or "fratura" in motivo:
+        return "Lesão / Motivos de saúde"
 
-    elif "mudou" in motivo or "mudanca" in motivo or "cidade" in motivo or "bairro" in motivo:
+    elif "mudou" in motivo or "mudanca" in motivo or "cidade" in motivo or "bairro" in motivo or "morando" in motivo:
         return "Mudança"
 
     elif "finance" in motivo or "dinheiro" in motivo or "valor" in motivo:
@@ -33,6 +33,12 @@ def categorizar_motivo(motivo):
     elif "aguardando resposta" in motivo:
         return "Aguardando resposta"
     
+    elif "morreu" in motivo or "faleceu" in motivo:
+        return "Falecimento"
+    
+    elif "numero" in motivo or "errado" in motivo:
+        return "Telefone errado / Mudou telefone"
+
     elif "viagem" in motivo or "viajando" in motivo or "ferias" in motivo or "retorna" in motivo or "temporariamente" in motivo or "vai renovar" in motivo:
         return "Viagem / Ausência Temporária"
 
