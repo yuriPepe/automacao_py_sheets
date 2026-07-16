@@ -1,7 +1,7 @@
 import requests
 from services.whatsapp.config import WHATSAPP_TOKEN, PHONE_NUMBER_ID
 
-def enviar_mensagem(numero, mensagem):
+def enviar_whatsapp(numero, mensagem):
 
     url = f"https://graph.facebook.com/v25.0/{PHONE_NUMBER_ID}/messages"
 
@@ -27,6 +27,6 @@ def enviar_mensagem(numero, mensagem):
 
     return resposta
 
-resposta = enviar_mensagem("5548988651056", "Mensagem teste")
+resposta = enviar_whatsapp("5548988651056", "Mensagem teste")
 print(resposta.status_code)
 print(resposta.json())
