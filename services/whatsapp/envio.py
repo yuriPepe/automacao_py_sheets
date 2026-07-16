@@ -8,7 +8,7 @@ def enviar_mensagens():
 
     for _, atleta in atletas.iterrows():
 
-        telefone = atleta["Telefone"]
+        telefone = atleta["Telefone envio"]
         nome = atleta["Nome"]
 
         mensagem = criar_mensagem(nome)

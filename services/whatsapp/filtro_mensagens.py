@@ -15,9 +15,23 @@ def filtrar_atletas_para_envio():
     atletas["Renovou?"].isin(["NÃO", "NAO"])
 ]
 
-    # Remove quem não possui telefone
-    atletas = atletas[atletas["Telefone"].notna()]
+    atletas["Telefone envio"] = (
+    atletas["Celular"]
+    .fillna("")
+    .astype(str)
+    .str.strip()
+)
 
-    atletas = atletas[atletas["Telefone"] != ""]
+    sem_celular = atletas["Telefone envio"] == ""
+
+    atletas.loc[sem_celular, "Telefone envio"] = (
+    atletas.loc[sem_celular, "Telefone"]
+    .fillna("")
+    .astype(str)
+    .str.strip()
+)
+
+    # Remove quem continua sem telefone
+    atletas = atletas[atletas["Telefone envio"] != ""]
 
     return atletas
