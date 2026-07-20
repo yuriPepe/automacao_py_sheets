@@ -1,4 +1,18 @@
 from services.sheets_service import ler_planilha
+import re
+
+def normalizar_telefone(telefone):
+
+    if telefone is None:
+        return ""
+
+    telefone = re.sub(r"\D", "", str(telefone))
+
+    # Adiciona o código do Brasil se não existir
+    if telefone and not telefone.startswith("55"):
+        telefone = "55" + telefone
+
+    return telefone
 
 def filtrar_atletas_para_envio():
 
@@ -33,5 +47,7 @@ def filtrar_atletas_para_envio():
 
     # Remove quem continua sem telefone
     atletas = atletas[atletas["Telefone envio"] != ""]
+
+    atletas["Telefone envio"] = atletas["Telefone envio"].apply(normalizar_telefone)
 
     return atletas
