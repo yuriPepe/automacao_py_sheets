@@ -1,5 +1,6 @@
 from services.sheets_service import ler_planilha
 import re
+from services.ui.input_service import obter_aba
 
 def normalizar_telefone(telefone):
 
@@ -16,9 +17,11 @@ def normalizar_telefone(telefone):
 
 def filtrar_atletas_para_envio():
 
+    aba = obter_aba()
+
     df = ler_planilha(
     "REMATRICULAS 2025 - 2026",
-    "06.26"
+    aba
     )
 
     atletas = df.copy()
