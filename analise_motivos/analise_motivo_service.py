@@ -30,14 +30,17 @@ def categorizar_motivo(motivo):
     elif "horario" in motivo or "tempo" in motivo:
         return "Horário"
 
-    elif "aguardando resposta" in motivo:
-        return "Aguardando resposta"
+    elif "aguardando resposta" in motivo or "sem resposta" in motivo or "nao respondeu" in motivo:
+        return "Aguardando resposta / Sem resposta"
     
     elif "morreu" in motivo or "faleceu" in motivo:
         return "Falecimento"
     
     elif "numero" in motivo or "errado" in motivo:
         return "Telefone errado / Mudou telefone"
+    
+    elif "nao pratica mais" in motivo or "nao esta praticando" in motivo or "nao pratica" in motivo or "parou de praticar" in motivo:
+        return "Parou de praticar esporte"
 
     elif "viagem" in motivo or "viajando" in motivo or "ferias" in motivo or "retorna" in motivo or "temporariamente" in motivo or "vai renovar" in motivo:
         return "Viagem / Ausência Temporária"
